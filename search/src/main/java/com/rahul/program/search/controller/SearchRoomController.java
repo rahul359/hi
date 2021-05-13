@@ -1,6 +1,8 @@
 package com.rahul.program.search.controller;
 
+import com.rahul.program.search.model.Room;
 import com.rahul.program.search.model.SearchRequest;
+import java.util.List;
 
 
 import com.rahul.program.search.service.SearchRoomService;
@@ -12,26 +14,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class SearchRoomController {
     @Autowired
     private SearchRoomService searchRoomService;
 
     //Returns all the available rooms
-    @GetMapping("/room")
-    public ResponseEntity<?> getAvailableRooms(@RequestBody SearchRequest searchRequest) {
-        try {
+    @PostMapping("/room")
+    public List<Room> getAvailableRooms(@RequestBody SearchRequest searchRequest) throws Exception {
+        
             return searchRoomService.getAllAvailableRooms(searchRequest);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(Map.of("message", e.getMessage()));
-        }
+        
     }
 
     //Returns true or false for whether room is available or not
-    @PostMapping("/room/check/{roomId}")
-    public ResponseEntity<?> checkIsRoomAvailable(@RequestBody SearchRequest searchRequest, @PathVariable String roomId) {
+    @PostMapping("/room/check/{roomNo}")
+    public ResponseEntity<?> checkIsRoomAvailable(@RequestBody SearchRequest searchRequest, @PathVariable Long roomNo) {
         try {
-            return searchRoomService.checkWhetherRoomIsAvailable(searchRequest, roomId);
+            return searchRoomService.checkWhetherRoomIsAvailable(searchRequest, roomNo);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(Map.of("message", e.getMessage()));

@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Room {
-    private String _id;
+
     private String type;
     private Long roomNo;
     private int noOfGuests;

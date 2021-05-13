@@ -17,7 +17,6 @@ public class Order {
     private int noOfGuests;
     private Guest guest;
     private int noOfDays;
-    private String roomId;
     private Long roomNo;
     private AmountDetails amountDetails;
     private String bookedAt;
