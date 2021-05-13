@@ -62,7 +62,7 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/employee/{id}")
-	public  ResponseEntity<?> getSingleRoom(@PathVariable("id") String id) {
+	public  ResponseEntity<?> getSingleEmployee(@PathVariable("id") String id) {
 		try {
 			return new ResponseEntity<>(employeeService.getSingleEmployee(id), HttpStatus.OK);
 		}catch (Exception e) {

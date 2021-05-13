@@ -11,15 +11,15 @@ import com.rahul.program.employee.model.Employee;
 public interface EmployeeService {
 
 	
-	public void createEmployee(Employee employee) throws ConstraintViolationException,  EmployeeException;
+	public Employee createEmployee(Employee employee) throws ConstraintViolationException,  EmployeeException;
 	
 	public List<Employee> getAllEmployee();
 	
 	public Employee getSingleEmployee(String id) throws EmployeeException;
 	
-	public void updateEmployee(String id, Employee employee) throws EmployeeException;
+	public Employee updateEmployee(String id, Employee employee) throws EmployeeException;
 	
-	public void deleteEmployeeById(String id) throws EmployeeException;
+	public String deleteEmployeeById(String id) throws EmployeeException;
 		
 	
 }

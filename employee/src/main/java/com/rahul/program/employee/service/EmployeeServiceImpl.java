@@ -21,14 +21,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	
     @Override
-	public void createEmployee(Employee employee) throws ConstraintViolationException, EmployeeException {
-		// TODO Auto-generated method stub
+	public Employee createEmployee(Employee employee) throws ConstraintViolationException, EmployeeException {
 		Optional<Employee>  employeeOptional = employeeRepo.findByEmployee(employee.getName());
 		if (employeeOptional.isPresent()) {
 			throw new EmployeeException(EmployeeException.EmployeeAlreadyExists());
 			
 		}else {
-			employeeRepo.save(employee);
+			return employeeRepo.save(employee);
 		}		
 	}
 
@@ -54,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public void updateEmployee(String id, Employee employee) throws EmployeeException {
+	public Employee updateEmployee(String id, Employee employee) throws EmployeeException {
 		Optional<Employee> employeeWithId = employeeRepo.findById(id);
 		if(employeeWithId.isPresent()) {
 	        Employee employeeToUpdate = employeeWithId.get();
@@ -65,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			
 			employeeToUpdate.setStatus(employee.isStatus());
 			
-			employeeRepo.save(employeeToUpdate);
+			return employeeRepo.save(employeeToUpdate);
 	
 			
 		}else {
@@ -74,12 +73,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public void deleteEmployeeById(String id) throws EmployeeException {
+	public String deleteEmployeeById(String id) throws EmployeeException {
 		Optional<Employee> employeeOptional = employeeRepo.findById(id);
 		if(!employeeOptional.isPresent()) {
 			throw new EmployeeException(EmployeeException.NotFoundException(id));
 		}else {
 			employeeRepo.deleteById(id);
+			return "Success";
 		}
 		
 	}
